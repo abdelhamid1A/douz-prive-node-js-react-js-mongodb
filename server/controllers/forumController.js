@@ -33,41 +33,29 @@ class ForumController {
                     }
                 },
                 {
-                    // Comment.aggregate([
-                    //     { $match: {} }
-                    // ]),
-                    //  $match: {id_post_f : post._id} ,
                     $lookup: {
-                        // $match: {id_post_f : post._id} ,
                         from: "comments",
                         localField: "_id",
                         foreignField: "id_post_f",
                         as: "comment"
                     }
                 },
+                
+                { $unwind: "$user" },
                 {
-                    // Comment.aggregate([
-                    //     { $match: {} }
-                    // ]),
-                    //  $match: {id_post_f : post._id} ,
-                    $lookup: {
-                        // $match: {id_post_f : post._id} ,
-                        from: "replays",
-                        localField: "_id",
-                        foreignField: "id_comment",
-                        as: "replay"
+                    "$project": {
+                        "post": 1,
+                        "createdAt":1,
+                        "updatedAt":1,
+                        "user._id": 1,
+                        "user.first_name": 1,
+                        "user.last_name": 1,
+                        "user.picture": 1,
+                        "comment._id":1,
+                        "comment.comment":1,
+                        "comment.createdAt":1,
                     }
                 },
-                // { $unwind: "$user" },
-                // {
-                //     "$project": {
-                //         "post": 1,
-                //         "createdAt":1,
-                //         "user._id": 1,
-                //         "user.first_name": 1,
-                //         "comment._id":1
-                //     }
-                // },
 
             ])
             res.status(200).json(getPost)
