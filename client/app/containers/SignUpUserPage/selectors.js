@@ -21,6 +21,21 @@ const makeSelectSignUpUserPage = () =>
     selectSignUpUserPageDomain,
     substate => substate,
   );
+const makeSelectSignUpUserPageUser =
+  createSelector(
+    selectSignUpUserPageDomain,
+    substate => substate.user,
+  );
+const makeSelectSignUpUserPageError =
+  createSelector(
+    selectSignUpUserPageDomain,
+    substate => substate.error,
+  );
+const makeSelectSignUpUserPageLoading = 
+  createSelector(
+    selectSignUpUserPageDomain,
+    substate => substate.loading,
+  );
 
 export default makeSelectSignUpUserPage;
-export { selectSignUpUserPageDomain };
+export { selectSignUpUserPageDomain,makeSelectSignUpUserPageUser,makeSelectSignUpUserPageError,makeSelectSignUpUserPageLoading };

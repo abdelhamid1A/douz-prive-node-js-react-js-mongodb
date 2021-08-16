@@ -6,15 +6,12 @@ import axios from 'axios'
 import {saveDataToLocalStorage} from '../../utils/localStorage'
 
 const validateUserFromApi = async(token)=>{
-  console.log(token);
   const {data} = await axios.get(API_URL+USER+'validation/'+token)
   return data
 }
 function* fetchUser({token}) {
-  console.log(token);
   try {
     const user  = yield validateUserFromApi(token)
-    console.log(user);
     yield put(validationAccountSuccessAction(user))
   } catch (error) {
     yield put(validationAccountFailAction(error))

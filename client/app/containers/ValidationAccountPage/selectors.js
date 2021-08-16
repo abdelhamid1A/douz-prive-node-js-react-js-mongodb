@@ -22,5 +22,11 @@ const makeSelectValidationAccountPage = () =>
     substate => substate,
   );
 
+const makeSelectValidationAccountPageUser = 
+  createSelector(
+    selectValidationAccountPageDomain,
+    substate => substate.user,
+  );
+
 export default makeSelectValidationAccountPage;
-export { selectValidationAccountPageDomain };
+export { makeSelectValidationAccountPageUser };

@@ -1,52 +1,52 @@
 /**
  *
- * SignInPage
+ * SignInAdminPage
  *
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useHistory,Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { htmlFormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectSignInPageUser, makeSelectSignInPageError, makeSelectSignInPageLoading } from './selectors';
+import makeSelectSignInAdminPage,{makeSelectLogingAdmin,makeSelectLogingAdminLoading,makeSelectLogingAdminError} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import '../../shared/styles.css'
-import { signInUserRequestAction } from './actions';
+import { loginAdminRequestAction } from './actions';
 import CustomInput from '../../components/CustomInput'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export function SignInPage() {
+export function SignInAdminPage() {
+  useInjectReducer({ key: 'signInAdminPage', reducer });
+  useInjectSaga({ key: 'signInAdminPage', saga });
+
   toast.configure()
-  useInjectReducer({ key: 'signInPage', reducer });
-  useInjectSaga({ key: 'signInPage', saga });
-  const { error, user, loading } = useSelector(mapStateToProps)
+  const { error, admin, loading } = useSelector(mapStateToProps)
   const dispatch = useDispatch()
   let history = useHistory();
+
   const initialValues = { email: '', password: '' }
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string().required('Required'),
   })
-  // error && console.log(error);
-  error && toast.error(error)
+
   const onSubmit = values => {
     // console.log(values);
-    dispatch(signInUserRequestAction(values))
+    dispatch(loginAdminRequestAction(values))
 
   }
-  user && user.token && history.push('sign-up')
   return (
     <Formik
       initialValues={initialValues}
@@ -80,19 +80,25 @@ export function SignInPage() {
   );
 }
 
-SignInPage.propTypes = {
+SignInAdminPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: makeSelectSignInPageUser,
-  error: makeSelectSignInPageError,
-  loading: makeSelectSignInPageLoading
+  admin:makeSelectLogingAdmin,
+  error:makeSelectLogingAdminError,
+  loading:makeSelectLogingAdminLoading,
 });
 
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
 
 const withConnect = connect(
   mapStateToProps,
+  mapDispatchToProps,
 );
 
-export default compose(withConnect)(SignInPage);
+export default compose(withConnect)(SignInAdminPage);

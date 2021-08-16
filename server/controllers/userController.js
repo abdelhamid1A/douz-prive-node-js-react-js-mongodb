@@ -77,7 +77,6 @@ class Usercontroller {
     // validation account 
     async accountVerify(req, res) {
         const token = req.params.token
-        console.log(token);
         try {
             const decodeToken = await jwt.verify(token, process.env.TOKENKEY)
             if (decodeToken) {
@@ -86,7 +85,7 @@ class Usercontroller {
                     const findUser = await User.findById(_id)
                     if (findUser) {
                         if (findUser.is_valid) {
-                            res.status(200).json({ message: 'this account is valid try to login' })
+                            res.status(202).json({ message: 'this account is valid try to login' })
                             return
                         }
 

@@ -29,7 +29,7 @@ class AdminController {
                 bcrypt.compare(password, findAdmin.password, (err, result) => {
                     if (result) {
                         const token = findAdmin.generatToken()
-                        res.status(200).json({ user: findAdmin, token })
+                        res.status(200).json({ admin: findAdmin, token })
                     } else {
                         res.status(404).json({ message: 'email or password incorrect' })
                     }
