@@ -4,3 +4,4 @@ export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 export const API_URL = 'http://localhost:4000/'
 export const USER = 'user/'
 export const ADMIN = 'admin/'
+export const VEHICULE = 'vehicule/'

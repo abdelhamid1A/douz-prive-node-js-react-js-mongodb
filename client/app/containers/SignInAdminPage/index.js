@@ -45,8 +45,10 @@ export function SignInAdminPage() {
   const onSubmit = values => {
     // console.log(values);
     dispatch(loginAdminRequestAction(values))
+    admin&&history.push('/admin-dashboard')
 
   }
+  console.log("admin",admin);
   return (
     <Formik
       initialValues={initialValues}
@@ -62,7 +64,7 @@ export function SignInAdminPage() {
                   <div className="center-wrap">
                     <div className="section text-center">
                       <Form action="" className="form-section mt-5">
-                        <h4 className="mb-4 pb-3">Log In</h4>
+                        <h4 className="mb-4 pb-3" style={{color: 'white'}}>Admin Log In</h4>
                         <CustomInput name="email" placeholder="email" type="text" icon="input-icon fa fa-user" />
                         <CustomInput name="password" placeholder="password" type="text" icon="input-icon fa fa-lock"  />
                         <Field type="submit" className="btnI mt-4" value={loading?'loading':'sign in'} />

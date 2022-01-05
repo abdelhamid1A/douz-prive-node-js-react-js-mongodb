@@ -14,8 +14,10 @@ import HomePage from 'containers/HomePage/Loadable';
 import SignIn from 'containers/SignInPage';
 import SignUpUserPage from 'containers/SignUpUserPage';
 import SignInAdminPage from 'containers/SignInAdminPage';
+import DashboardAdminContainer from 'containers/DashboardAdminContainer';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import validatAccount from 'containers/ValidationAccountPage';
+import displayItemsPage from '../DisplayItemPage'
 import Footer from '../../shared/Footer';
 import Header from '../../shared/Header';
 
@@ -26,10 +28,12 @@ export default function App() {
     <div>
         <Header/>
       <Switch>
-        <Route exact path="/" component={SignIn} />
+        <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/sign-up" component={SignUpUserPage} />
         <Route path='/account/validate/' component={validatAccount}/>
         <Route path='/admin-login' component={SignInAdminPage}/>
+        <Route path='/admin-dashboard' component={DashboardAdminContainer}/>
+        <Route path='/' component={displayItemsPage}/>
         <Route component={NotFoundPage} />
       </Switch>
       <Footer/>

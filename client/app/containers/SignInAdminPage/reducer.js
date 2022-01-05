@@ -15,6 +15,7 @@ export const initialState = {
 /* eslint-disable default-case, no-param-reassign */
 const signInAdminPageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
+    // console.log(action);
     switch (action.type) {
       case LOGIN_ADMIN_REQUEST:
         return {
@@ -23,7 +24,7 @@ const signInAdminPageReducer = (state = initialState, action) =>
       case LOGIN_ADMIN_SUCCESS:
         return {
           loading:false,
-          user:action.admin
+          admin:action.user.token
         }
       case LOGIN_ADMIN_FAIL:
         return {
