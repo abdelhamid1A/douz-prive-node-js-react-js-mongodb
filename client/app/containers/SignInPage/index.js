@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useHistory,Link } from "react-router-dom";
@@ -44,9 +44,13 @@ export function SignInPage() {
   const onSubmit = values => {
     // console.log(values);
     dispatch(signInUserRequestAction(values))
+    .then(({data})=>console.log(data))
 
   }
-  user && user.token && history.push('sign-up')
+  // useEffect(() =>{
+
+  //   !loading&&user && user.token && history.push('/')
+  // },[user])
   return (
     <Formik
       initialValues={initialValues}

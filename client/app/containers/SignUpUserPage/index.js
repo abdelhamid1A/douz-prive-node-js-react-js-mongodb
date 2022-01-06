@@ -131,7 +131,7 @@ const onchange = e => {
                         <input id="picture" name="picture" className="form-style" type="file" onChange={onchange} multiple />
                         <div className="errMessage"><ErrorMessage name="picture" /></div>
                         <Field type="submit" className="btnI mt-4" value={loading?'loading':'sign in'} />
-                        <p className="mb-0 mt-4 text-center"><Link to="/" className="link">login Page</Link></p>
+                        <p className="mb-0 mt-4 text-center"><Link to="/sign-in" className="link">login Page</Link></p>
                       </Form>
                     </div>
                   </div>

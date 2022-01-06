@@ -1,39 +1,39 @@
 import React,{useState,useEffect} from 'react'
 import {Link,useHistory} from 'react-router-dom'
-const logo = require('../assest/WA.png')
-import { connect } from 'react-redux';
+const logo = require('../assets/images/WA.png')
+// import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
-import { createStructuredSelector } from 'reselect';
-import { useDispatch, useSelector } from 'react-redux'
-import { compose } from 'redux';
-import makeSelectSignInAdminPage,{makeSelectLogingAdmin,makeSelectLogingAdminLoading,makeSelectLogingAdminError} from '../../app/containers/SignInAdminPage/selectors';
-import {makeSelectSignInPageUser} from '../containers/SignInPage/selectors'
+// import { createStructuredSelector } from 'reselect';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { compose } from 'redux';
+// import makeSelectSignInAdminPage,{makeSelectLogingAdmin,makeSelectLogingAdminLoading,makeSelectLogingAdminError} from '../../app/containers/SignInAdminPage/selectors';
+// import {makeSelectSignInPageUser} from '../containers/SignInPage/selectors'
 
-function Header() {
+export default function Header() {
     let history = useHistory();
-    const { error, admin, loading ,user} = useSelector(mapStateToProps)
+    // const { error, admin, loading ,user} = useSelector(mapStateToProps)
     // console.log(admin);
     const [tokenAdmin,setTokenAdmin] = useState('')
     const [tokenUser,setTokenUser] = useState('')
     // const token = localStorage.getItem('admin-token') 
-    const path = window.location.pathname
-    console.log('user',user.token);
-    const handleLog = (token,key,destination,setToken)=>{
-        // console.log("here");
-        // console.log(token,key,destination,setToken);
-        // const token = loca
-        if(token){
-            localStorage.removeItem(key)
-            setToken(localStorage.getItem(key))
-            history.push('/admin-login')
-        }else{
-            history.push(destination)
-        }
-    }
-    useEffect(() => {
-        // setTokenAdmin(localStorage.getItem('admin-token')||'' )
-        setTokenUser(localStorage.getItem('token')||'' )
-    }, [tokenAdmin,tokenUser])
+    // const path = window.location.pathname
+    // console.log('user',user.token);
+    // const handleLog = (token,key,destination,setToken)=>{
+    //     // console.log("here");
+    //     // console.log(token,key,destination,setToken);
+    //     // const token = loca
+    //     if(token){
+    //         localStorage.removeItem(key)
+    //         setToken(localStorage.getItem(key))
+    //         history.push('/admin-login')
+    //     }else{
+    //         history.push(destination)
+    //     }
+    // }
+    // useEffect(() => {
+    //     // setTokenAdmin(localStorage.getItem('admin-token')||'' )
+    //     setTokenUser(localStorage.getItem('token')||'' )
+    // }, [tokenAdmin,tokenUser])
     // console.log("tokenAdmin",tokenAdmin);
     return (
         <nav className="navbar navbar-expand-lg navbar-light " >
@@ -75,7 +75,7 @@ function Header() {
                         <Link className="nav-link" to="vol">diagnostic</Link>
                     </li>
 
-
+{/* 
                    {user||tokenUser?
                     <li className="nav-item">
                         <Link className="nav-link" to={user||tokenUser?'/logout':'/sign-in'} ><i className="fa fa-user-circle" ></i>{user||tokenUser?'logout':'login'}</Link>
@@ -88,7 +88,7 @@ function Header() {
 
                    {user||tokenUser&& <li className="nav-item">
                         <button className="btn btn-primary"><Link className="nav-link" to="annonce">Place an ad</Link></button>
-                    </li>}
+                    </li>} */}
 
                     {/* <li className="nav-item">
                         <button className="btn btn-primary"><Link className="nav-link" to="login">Déposer une annonce</Link></button>
@@ -101,22 +101,22 @@ function Header() {
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    admin:makeSelectLogingAdmin,
-    error:makeSelectLogingAdminError,
-    loading:makeSelectLogingAdminLoading,
-    user:makeSelectSignInPageUser
-  });
+// const mapStateToProps = createStructuredSelector({
+//     admin:makeSelectLogingAdmin,
+//     error:makeSelectLogingAdminError,
+//     loading:makeSelectLogingAdminLoading,
+//     user:makeSelectSignInPageUser
+//   });
 
-  function mapDispatchToProps(dispatch) {
-    return {
-      dispatch,
-    };
-  }
+//   function mapDispatchToProps(dispatch) {
+//     return {
+//       dispatch,
+//     };
+//   }
   
-  const withConnect = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  );
+//   const withConnect = connect(
+//     mapStateToProps,
+//     mapDispatchToProps,
+//   );
   
-export default compose(withConnect)(Header);
+// export default compose(withConnect)(Header);
