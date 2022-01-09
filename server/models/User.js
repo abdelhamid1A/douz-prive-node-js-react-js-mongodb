@@ -30,12 +30,12 @@ const userSchema = mongoose.Schema({
         type :Date,
         default :new Date(),
     },
-    picture:{
-        type :String,
-    },
+    // picture:{
+    //     type :String,
+    // },
     is_valid:{
         type:Boolean,
-        default:false
+        default:true
     }
 },
   {

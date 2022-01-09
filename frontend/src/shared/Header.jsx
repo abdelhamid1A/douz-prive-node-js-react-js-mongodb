@@ -1,21 +1,24 @@
-import React,{useState,useEffect} from 'react'
-import {Link,useHistory} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { getDataFromLocalStorage , removeDataFromLocalStorage} from '../helper/local.storage.helper'
+import { userSelector } from '../features/auth/signIn.container/redux/selectors'
+import {logoutAction} from '../features/auth/signIn.container/redux/actions'
 const logo = require('../assets/images/WA.png')
-// import { connect } from 'react-redux';
-// import { FormattedMessage } from 'react-intl';
-// import { createStructuredSelector } from 'reselect';
-// import { useDispatch, useSelector } from 'react-redux'
-// import { compose } from 'redux';
-// import makeSelectSignInAdminPage,{makeSelectLogingAdmin,makeSelectLogingAdminLoading,makeSelectLogingAdminError} from '../../app/containers/SignInAdminPage/selectors';
-// import {makeSelectSignInPageUser} from '../containers/SignInPage/selectors'
 
 export default function Header() {
     let history = useHistory();
-    // const { error, admin, loading ,user} = useSelector(mapStateToProps)
+    const dispatch = useDispatch();
+    const { user } = useSelector(userSelector)
     // console.log(admin);
-    const [tokenAdmin,setTokenAdmin] = useState('')
-    const [tokenUser,setTokenUser] = useState('')
-    // const token = localStorage.getItem('admin-token') 
+    const [tokenUser, setTokenUser] = useState('')
+    const logout = ()=>{
+        setTokenUser('');
+        removeDataFromLocalStorage('token');
+        dispatch(logoutAction())
+    }
+    // const token = getDataFromLocalStorage('token') 
+    // console.log(token);
     // const path = window.location.pathname
     // console.log('user',user.token);
     // const handleLog = (token,key,destination,setToken)=>{
@@ -30,11 +33,9 @@ export default function Header() {
     //         history.push(destination)
     //     }
     // }
-    // useEffect(() => {
-    //     // setTokenAdmin(localStorage.getItem('admin-token')||'' )
-    //     setTokenUser(localStorage.getItem('token')||'' )
-    // }, [tokenAdmin,tokenUser])
-    // console.log("tokenAdmin",tokenAdmin);
+    useEffect(() => {
+        setTokenUser(getDataFromLocalStorage('token') || '')
+    }, [])
     return (
         <nav className="navbar navbar-expand-lg navbar-light " >
 
@@ -43,27 +44,6 @@ export default function Header() {
                 <span className="navbar-toggler-icon" ></span>
             </button>
             <div className="collapse navbar-collapse " id="navbarNav">
-                {/* {
-                    tokenAdmin
-                    ?
-                    <ul className="navbar-nav">
-                    <li className="nav-item ">
-                        <Link className="nav-link" to="search?cat=voitur#">Vin</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="search?cat=moto">Ads</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="forum">Post</Link>
-                    </li>
-
-                    <li className="nav-item">
-                        <span className="nav-link" onClick={()=>handleLog(tokenAdmin,'admin-token','/admin-login',setTokenAdmin)} ><i className="fa fa-user-circle" ></i>{tokenAdmin?'logout':'login'}</span>
-                    </li>
-                </ul>
-                   : */}
-
-                
                 <ul className="navbar-nav">
                     <li className="nav-item ">
                         <Link className="nav-link" to="/">Home</Link>
@@ -75,48 +55,28 @@ export default function Header() {
                         <Link className="nav-link" to="vol">diagnostic</Link>
                     </li>
 
-{/* 
-                   {user||tokenUser?
-                    <li className="nav-item">
-                        <Link className="nav-link" to={user||tokenUser?'/logout':'/sign-in'} ><i className="fa fa-user-circle" ></i>{user||tokenUser?'logout':'login'}</Link>
-                    </li>
-                    :
-                    <li className="nav-item">
-                        <Link className="nav-link" to={user||tokenUser?'/logout':'/sign-in'} ><i className="fa fa-user-circle" ></i>{user||tokenUser?'logout':'login'}</Link>
-                    </li>
+
+                    {user?.token || tokenUser ?
+                        <>
+                            <li className="nav-item">
+                                {/* <span className="nav-link" to={'/logout'} ><i className="fa fa-user-circle" ></i>logout</span> */}
+                                <span className="nav-link" onClick={()=>logout()} ><i className="fa fa-user-circle" ></i>logout</span>
+                            </li>
+                            <li className="nav-item">
+                                <button className="btn btn-primary"><Link className="nav-link" to="add-item">Place an ad</Link></button>
+                            </li>
+                        </>
+                        :
+                        <li className="nav-item">
+                            <Link className="nav-link" to={'/sign-in'} ><i className="fa fa-user-circle" ></i>login</Link>
+                        </li>
                     }
 
-                   {user||tokenUser&& <li className="nav-item">
-                        <button className="btn btn-primary"><Link className="nav-link" to="annonce">Place an ad</Link></button>
-                    </li>} */}
-
-                    {/* <li className="nav-item">
-                        <button className="btn btn-primary"><Link className="nav-link" to="login">Déposer une annonce</Link></button>
-                    </li> */}
                 </ul>
 
-                
+
             </div>
         </nav>
     )
 }
 
-// const mapStateToProps = createStructuredSelector({
-//     admin:makeSelectLogingAdmin,
-//     error:makeSelectLogingAdminError,
-//     loading:makeSelectLogingAdminLoading,
-//     user:makeSelectSignInPageUser
-//   });
-
-//   function mapDispatchToProps(dispatch) {
-//     return {
-//       dispatch,
-//     };
-//   }
-  
-//   const withConnect = connect(
-//     mapStateToProps,
-//     mapDispatchToProps,
-//   );
-  
-// export default compose(withConnect)(Header);

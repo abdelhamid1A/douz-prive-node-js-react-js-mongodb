@@ -10,15 +10,16 @@ class Usercontroller {
         // console.log(req.body);
         // console.log(req.file);
         // return
-        try {
+        // try {
             const findEmail = await User.findOne({ email: req.body.email })
             if (findEmail) {
                 res.status(400).json({ message: 'this email already signup ' })
             } else {
-                req.body.picture = req.file.filename
-                const { first_name, last_name, email, password, city, phone, picture } = req.body
+                // req.body.picture = req.file.filename
+                // const { first_name, last_name, email, password, city, phone, picture } = req.body
+                const { first_name, last_name, email, password, city, phone } = req.body;
                 // console.log(123);
-                console.log(req.body);
+                // console.log(req.body);
                 // return 
                 bcrypt.hash(password, 10, (err, hash) => {
                     if (hash) {
@@ -30,14 +31,14 @@ class Usercontroller {
                             password: hash,
                             city,
                             phone,
-                            picture
+                            // picture
                         })
                         user.save()
                             .then(doc => {
                                 const token = jwt.sign({ _id: doc._id, is_valid: doc.is_valid }, process.env.TOKENKEY)
                                 const info = { token, email: doc.email }
                                 sendMail(info)
-                                res.status(200).json(doc);
+                                res.status(200).json({user:info,message:'user Created'});
                             })
                             .catch(error => console.log(error))
                     }
@@ -46,9 +47,11 @@ class Usercontroller {
 
             }
 
-        } catch (error) {
-            console.log(error);
-        }
+        // } 
+        // catch (error) {
+            
+        //     console.log(error);
+        // }
 
     }
 

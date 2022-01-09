@@ -2,12 +2,14 @@ export const backendServerConfig = {
   appUrl: 'http://localhost'
 };
 
-const env = 'localhost'
+const env = 'localhost';
+const port = 4000;
+
 export const MICROSERVICE_BASE_URL = env == 'localhost'
   ? {
-    ADMIN: `${backendServerConfig.appUrl}:4000/admin/`,
-    USER: `${backendServerConfig.appUrl}:4000/user/`,
-    VEHICULE: `${backendServerConfig.appUrl}:4000/vehicule/`,
+    ADMIN: `${backendServerConfig.appUrl}:${port}/admin/`,
+    USER: `${backendServerConfig.appUrl}:${port}/user/`,
+    VEHICULE: `${backendServerConfig.appUrl}:${port}/vehicule/`,
 
   }
   : {

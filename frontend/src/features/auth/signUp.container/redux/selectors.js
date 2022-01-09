@@ -1,0 +1,1 @@
+export const signUpSelector = (store)=>store.signUp 

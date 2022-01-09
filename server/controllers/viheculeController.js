@@ -5,13 +5,13 @@ const mongoHelper = require('../helpers/mongo.helper')
 
 class vehiculeController {
     async getVihecule(req,res) {
-        const {limit,page,pagination,type,serachText} = req.query;
+        const {limit,page,pagination,type,searchText} = req.query;
         let query={};
         if(type){
             query.type={ $regex: new RegExp(type), $options: "i" }
         }
-        if(serachText){
-            query.title={ $regex: new RegExp(serachText), $options: "i" }
+        if(searchText){
+            query.title={ $regex: new RegExp(searchText), $options: "i" }
         }
         // console.log(pagination);
         var options = {
@@ -19,7 +19,7 @@ class vehiculeController {
               path: 'userId',
               select: 'first_name'
             }],
-            // sort: ({ createdAt: -1 })
+            sort: ({ createdAt: -1 })
           };
         //   var options = {
         //     select: 'title userId',
@@ -34,6 +34,8 @@ class vehiculeController {
     }
     async addVihecule(req,res) {
         try {
+            // console.log('here');
+            // console.log(req.headers.authorization);
         //    const token =  helpersFunction.spliceToken(req.headers.authorization)
         //    console.log(token[1]);
            const userId =await mongoHelper.findUserUsingToken(req.headers.authorization)

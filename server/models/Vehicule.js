@@ -39,12 +39,13 @@ const vehiculeScheme = mongoose.Schema({
     },
     is_accedent:{
         type : String,
-        required : true
+        required : true,
+        default : false
     },
-    model:{
-        type : Number,
-        required : true
-    },
+    // model:{
+    //     type : Number,
+    //     required : true
+    // },
 },
     {
         timestamps: true,

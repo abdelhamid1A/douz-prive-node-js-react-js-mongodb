@@ -4,16 +4,14 @@ import {getItemsSuccessAction,getItemsFailAction} from './actions';
 import {GET_ITEMS_REQUEST} from './constants';
 import {MICROSERVICE_BASE_URL} from '../../../config/config.backend.server'
 
-// const loginAdminFromAPI = async(payload)=>{
-//   const {data} = await axios.post(API_URL+VEHICULE+'signIn',payload)
-//   return data
-// }
-function getItemFromAPI({page, limit, paged,txt,genre}) {
-  // console.log(txt,genre);
+
+function getItemFromAPI({page, limit, paged,searchText,genre}) {
+  // console.log(searchText,genre);
+  // limit=3&page=1&pagination=true&type=&serachText=kawa
   return axios.get(
-    `${MICROSERVICE_BASE_URL.VEHICULE}?page=${page || 0}&limit=${
+    `${MICROSERVICE_BASE_URL.VEHICULE}?limit=${
       limit || 5
-    }&paged=${paged || false}&searchText=${txt||""}&type=${genre||''}`,
+    }&page=${page || 0}&pagination=${paged || true}&type=${genre||''}&searchText=${searchText||""}`,
   );
 }
 

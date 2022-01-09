@@ -423,3 +423,110 @@ h2{
 }
 
 /* end footer style   */
+
+.region-heading{
+  font-size: 32px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #2d2d2d;
+  margin: 0;
+}
+.selectbox{
+  width: 49%;
+}
+#chooseb, #subarea, #bigregion{
+  width: 100% !important;
+  height: 48px !important;
+}
+#showOtherReg .modal-dialog{
+  width: 620px;
+  border-radius: 8px;
+  padding: 16px;
+}
+button:focus, #showOtherReg:focus{
+  outline: none !important;
+}
+#chooseb_auto, #chooseb{
+  border-radius: 4px !important;
+  background-color: #abc4ff;
+  width: 148px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1.2px;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  border: none;
+  pointer-events: none;
+  height: 48px !important;
+  
+}
+#close_btn{
+  font-size: 30px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #2d2d2d;
+  background: white;
+  border: none;
+}
+.line {
+  display: block;
+  margin: 13px 0 35px 0;
+}
+
+.line h2 {
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #666666;
+  text-align: center;
+  border-bottom: 0.5px solid #d0d0d0;
+  position: relative;
+}
+
+.line h2 span {
+  background-color: white;
+  text-shadow: none;
+  position: relative;
+  top: 10px;
+  padding: 0 10px;
+}
+#yourCity{
+  width: 73% !important;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  height: 48px !important;
+}
+.select-font{
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+.msg_error{
+  background: none !important;
+  color: #c86e67 !important;
+  padding: 0 !important;
+}
+
+
+
+
